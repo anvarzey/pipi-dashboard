@@ -9,9 +9,7 @@ import {
 import { ResponsiveLine } from '@nivo/line'
 import { ReactElement, useMemo } from 'react'
 import { Dayjs } from 'dayjs'
-// import useActualStats from '@/hooks/useActualStats'
-import useSWR from 'swr'
-import { IOverallStat } from '@/models/OverallStat'
+import useActualStats from '@/hooks/useActualStats'
 
 interface InRange {
   date: Date
@@ -21,8 +19,7 @@ interface InRange {
 export default function DailyChart ({ startDate, endDate }: { startDate: Date | Dayjs | null, endDate: Date | Dayjs | null }): ReactElement {
   const theme = useTheme()
   const isMobile = useMediaQuery('(max-width: 600px)')
-  // const { data, isLoading } = useActualStats()
-  const { data, isLoading, error }: { data: IOverallStat | undefined, isLoading: boolean, error: Error | undefined } = useSWR('/api/stat/general/actual')
+  const { data, isLoading, error } = useActualStats()
 
   const formattedData = useMemo(() => {
     if (data === null || data === undefined) return []
@@ -89,7 +86,7 @@ export default function DailyChart ({ startDate, endDate }: { startDate: Date | 
     )
   }
 
-  if (error) {
+  if (error !== undefined) {
     return (
       <Box height='100%' width='100%' display='flex' alignItems='center' justifyContent='center'>
         <Typography>An error has been occurred</Typography>

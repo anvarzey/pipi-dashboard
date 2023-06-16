@@ -8,9 +8,7 @@ import {
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid'
 import { ReactElement } from 'react'
 import formatPrice from '../utils/formatPrice'
-// import useSales from '@/hooks/useSales'
-import useSWR from 'swr'
-import { ISale } from '@/models/Sale'
+import useSales from '@/hooks/useSales'
 
 const columns: GridColDef[] = [
   { field: 'col1', headerName: '', flex: 0.5 },
@@ -32,8 +30,7 @@ const initialState = {
 
 export default function SalesTable ({ dashboardMode = false }: { dashboardMode?: boolean }): ReactElement {
   const theme = useTheme()
-  // const { data, isLoading } = useSales()
-  const { data, isLoading, error }: { data: ISale[] | undefined, isLoading: boolean, error: Error | undefined } = useSWR('/api/sale')
+  const { data, isLoading, error } = useSales()
 
   if (isLoading) {
     return (
@@ -59,7 +56,7 @@ export default function SalesTable ({ dashboardMode = false }: { dashboardMode?:
     })
   }
 
-  if (error) {
+  if (error !== undefined) {
     return (
       <Box height='100%' width='100%' display='flex' alignItems='center' justifyContent='center'>
         <Typography>An error has been occurred</Typography>

@@ -6,10 +6,8 @@ import {
   useTheme
 } from '@mui/material'
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid'
-// import useUsers from '@/hooks/useUsers'
-import useSWR from 'swr'
+import useUsers from '@/hooks/useUsers'
 import { ReactElement } from 'react'
-import { IUser } from '@/models/User'
 
 let rows: GridRowsProp
 
@@ -23,8 +21,7 @@ const initialState = {
 
 export default function ClientsTable (): ReactElement {
   const theme = useTheme()
-  // const { data, isLoading } = useUsers()
-  const { data, isLoading, error }: { data: IUser[] | undefined, isLoading: boolean, error: Error | undefined } = useSWR('/api/user')
+  const { data, isLoading, error } = useUsers()
 
   if (isLoading) {
     return (
@@ -56,7 +53,7 @@ export default function ClientsTable (): ReactElement {
       }))
   }
 
-  if (error) {
+  if (error !== undefined) {
     return (
       <Box height='100%' width='100%' display='flex' alignItems='center' justifyContent='center'>
         <Typography>An error has been occurred</Typography>

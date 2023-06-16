@@ -1,5 +1,5 @@
 // import { IOverallStat } from '@/models/OverallStat'
-// import useActualStats from '@/hooks/useActualStats'
+import useActualStats from '@/hooks/useActualStats'
 import {
   CircularProgress,
   Box,
@@ -10,13 +10,11 @@ import {
 } from '@mui/material'
 import { ResponsivePie } from '@nivo/pie'
 import { ReactElement, useMemo } from 'react'
-import useSWR from 'swr'
 
 export default function BreakdownChart ({ dashboardMode = false }: { dashboardMode?: boolean }): ReactElement {
   const isMobile = useMediaQuery('(max-width: 600px)')
   const theme = useTheme()
-  // const { data, isLoading } = useActualStats()
-  const { data, isLoading, error } = useSWR('/api/stat/general/actual')
+  const { data, isLoading, error } = useActualStats()
 
   const formattedData = useMemo(() => {
     if (data === undefined || data === null) return []
@@ -74,7 +72,7 @@ export default function BreakdownChart ({ dashboardMode = false }: { dashboardMo
     )
   }
 
-  if (error) {
+  if (error !== undefined) {
     return (
       <Box height='100%' width='100%' display='flex' alignItems='center' justifyContent='center'>
         <Typography>An error has been occurred</Typography>
@@ -127,32 +125,31 @@ export default function BreakdownChart ({ dashboardMode = false }: { dashboardMo
       }
       legends={
         dashboardMode
-          ? [
-            {
-              anchor: 'right',
-              direction: 'column',
-              justify: false,
-              translateX: 140,
-              translateY: -10,
-              itemsSpacing: 20,
-              itemWidth: 120,
-              itemHeight: 18,
-              itemTextColor: '#CCC',
-              itemDirection: 'left-to-right',
-              itemOpacity: 1,
-              symbolSize: 18,
-              symbolShape: 'circle',
-              effects: [{
-                on: 'hover',
-                style: {
-                  itemTextColor: theme.palette.secondary['100' as keyof PaletteColor]
-                }
-              }]
-            }
-          ]
+          ? (
+              [
+                {
+                  anchor: 'right',
+                  direction: 'column',
+                  justify: false,
+                  translateX: 140,
+                  translateY: -10,
+                  itemsSpacing: 20,
+                  itemWidth: 120,
+                  itemHeight: 18,
+                  itemTextColor: '#CCC',
+                  itemDirection: 'left-to-right',
+                  itemOpacity: 1,
+                  symbolSize: 18,
+                  symbolShape: 'circle',
+                  effects: [{
+                    on: 'hover',
+                    style: {
+                      itemTextColor: theme.palette.secondary['100' as keyof PaletteColor]
+                    }
+                  }]
+                }])
           : isMobile
-            ? [
-              {
+            ? [{
                 anchor: 'bottom-left',
                 direction: 'column',
                 justify: false,
@@ -172,10 +169,8 @@ export default function BreakdownChart ({ dashboardMode = false }: { dashboardMo
                     itemTextColor: theme.palette.secondary['100' as keyof PaletteColor]
                   }
                 }]
-              }
-            ]
-            : [
-              {
+              }]
+            : [{
                 anchor: 'bottom',
                 direction: 'row',
                 justify: false,
@@ -196,7 +191,7 @@ export default function BreakdownChart ({ dashboardMode = false }: { dashboardMo
                   }
                 }]
               }
-            ]
+              ]
       }
     />
   )
