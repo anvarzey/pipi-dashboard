@@ -5,7 +5,7 @@ import '@/services/connectToMongo'
 export default async function gralStatsHandler (
   req: NextApiRequest,
   res: NextApiResponse
-  ) {
+): Promise<void> {
   try {
     const allOverallStats = await OverallStat.find({})
     res.status(200).json(allOverallStats)

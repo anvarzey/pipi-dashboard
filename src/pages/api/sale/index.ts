@@ -5,7 +5,7 @@ import '@/services/connectToMongo'
 export default async function salesHandler (
   req: NextApiRequest,
   res: NextApiResponse
-  ) {
+): Promise<void> {
   try {
     const allSales = await Sale.find({})
 

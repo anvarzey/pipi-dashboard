@@ -6,7 +6,7 @@ import '@/services/connectToMongo'
 export default async function dashboardHandler (
   req: NextApiRequest,
   res: NextApiResponse
-  ) {
+): Promise<void> {
   try {
     const allStats: IOverallStat[] = await OverallStat.find({})
     // if (allStats === null) throw new Error('')

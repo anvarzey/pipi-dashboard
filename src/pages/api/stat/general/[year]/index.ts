@@ -5,7 +5,7 @@ import '@/services/connectToMongo'
 export default async function yearStatsHandler (
   req: NextApiRequest,
   res: NextApiResponse
-  ) {
+): Promise<void> {
   const { year } = req.query
 
   try {

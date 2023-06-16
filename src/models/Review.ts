@@ -1,5 +1,5 @@
 import { model, models, Schema } from 'mongoose'
-import { Product, IProduct } from './Product'
+import { IProduct } from './Product'
 import { IUser } from './User'
 
 export interface IReview {

@@ -5,7 +5,7 @@ import '@/services/connectToMongo'
 export default async function productStatsHandler (
   req: NextApiRequest,
   res: NextApiResponse
-) {
+): Promise<void> {
   try {
     const allProductStats = await ProductStat.find({})
 

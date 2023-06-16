@@ -15,7 +15,7 @@ interface IReviewPopulated {
 }
 
 interface IReturnTypes {
-  data: IReviewPopulated[]                                                                                                                                                                                                                                                                                                                      
+  data: IReviewPopulated[]
   isLoading: boolean
   error: Error | undefined
 }
