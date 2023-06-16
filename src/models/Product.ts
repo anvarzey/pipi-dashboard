@@ -1,7 +1,6 @@
 import {
   model,
   models,
-  ObjectId,
   Schema,
   Types
 } from 'mongoose'

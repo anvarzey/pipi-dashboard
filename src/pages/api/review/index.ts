@@ -7,7 +7,7 @@ import { Product } from '@/models/Product'
 export default async function reviewsHandler (
   req: NextApiRequest,
   res: NextApiResponse
-) {
+): Promise<void> {
   if (req.method === 'GET') {
     try {
       const allReviews = await Review
