@@ -79,7 +79,7 @@ export default function Sidebar ({ drawerWidth, handleDrawerClose, open }: { dra
                   key={page.name}
                   disablePadding
                   sx={() => (
-                    active === page.name.toLowerCase()
+                    active === page.url
                       ? { backgroundColor: `${theme.palette.primary['60' as keyof PaletteColor]}` }
                       : {}
                   )}
@@ -101,7 +101,6 @@ export default function Sidebar ({ drawerWidth, handleDrawerClose, open }: { dra
                 </ListItem>
               ))}
             </List>
-            {/* <Divider /> */}
             <Typography color='primary.contrastText' p='0.5rem 1rem 0.25rem'>Estadísticas</Typography>
             <Divider />
             <List>
@@ -111,7 +110,7 @@ export default function Sidebar ({ drawerWidth, handleDrawerClose, open }: { dra
                     key={page.name}
                     disablePadding
                     sx={() => (
-                      active === page.name.toLowerCase()
+                      active === page.url
                         ? { backgroundColor: `${theme.palette.primary['60' as keyof PaletteColor]}` }
                         : {}
                     )}

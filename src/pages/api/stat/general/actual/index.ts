@@ -6,7 +6,8 @@ export default async function actualStatsHandler (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
-  const year = new Date().getFullYear()
+  const year = 2023
+
   try {
     const yearStats = await OverallStat.findOne({ year })
     if (yearStats === null) throw new Error('Not found')
