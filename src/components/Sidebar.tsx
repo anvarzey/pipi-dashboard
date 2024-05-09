@@ -24,9 +24,14 @@ export default function Sidebar ({ drawerWidth, handleDrawerClose, open }: { dra
     if (router.pathname.substring(1).includes('-')) {
       setActive(router.pathname.substring(1).split('-').join(' '))
     } else {
-      setActive(router.pathname.substring(1))
+      if (router.pathname !== '/') {
+        setActive(router.pathname.substring(1))
+      } else {
+        setActive(router.pathname)
+      }
     }
   }, [router.pathname])
+
   return (
     <Box
       component='nav'
@@ -60,7 +65,7 @@ export default function Sidebar ({ drawerWidth, handleDrawerClose, open }: { dra
             <Link
               style={{
                 textDecoration: 'none',
-                backgroundColor: active === 'dashboard' ? theme.palette.primary['60' as keyof PaletteColor] : 'transparent'
+                backgroundColor: active === '/' ? theme.palette.primary['60' as keyof PaletteColor] : 'transparent'
               }}
               href='/'
             >
